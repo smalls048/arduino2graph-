@@ -1,2 +1,2 @@
 ./webserversetup.sh
-python3 ArduinoSerialRead2Graph.py
+python3 arduino2pi.py
