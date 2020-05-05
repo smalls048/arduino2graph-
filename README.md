@@ -7,3 +7,4 @@ and ```pip3 install pyserial```
 then in one terminal ```python -m SimpleHTTPServer```  
 and in another ```python3 arduino2pi.py```  
 
+For this to work you must **not** use ssh instead use VNC or any other remote desktop viewer that will allow the desktop to be seen.
