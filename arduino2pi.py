@@ -25,6 +25,7 @@ def graphdata(f):
     graph.clear()
     graph.plot (x,y)
     plot.xticks(rotation=45, ha='right')
+    plot.subplots_adjust(bottom=0.30)
     plot.savefig('temp.png')
 animated = animation.FuncAnimation(plt, graphdata, interval=100 )
 plot.show()
