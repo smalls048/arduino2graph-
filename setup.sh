@@ -1,2 +1,2 @@
-python - m SimpleHTTPServer &
+python -m SimpleHTTPServer &
 python3 arduino2pi.py
