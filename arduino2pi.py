@@ -7,7 +7,7 @@ interval = 2 #recommended to leave at 2
 
 x=[]
 y=[]
-serconfig = serial.Serial('COM3', 9600)    
+serconfig = serial.Serial('/dev/ttyACM0', 9600) 
 plt = plot.figure() 
 graph = plt.add_subplot(1,1,1)
 def graphdata(f):
