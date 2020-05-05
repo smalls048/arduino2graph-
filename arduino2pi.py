@@ -1,40 +1,29 @@
 import serial
 import time
 import matplotlib.pyplot as plot
-starttime=time.time()
-ser = serial.Serial('COM3', 9600)
-line = ser.readline()
-line = line.decode( 'utf-8' )
-print(line)
-x = []
-y = []
-exectime=0
-while exectime<60:
-    time.sleep(2)
-    line = ser.readline()
-    line=line.decode('utf-8')
-    print(line)
-    num1 = str(line[30])
-    num2 = str(line[31])
-    num3 = str(line[32])
-    num4 = str(line[33])
-    num5 = str(line[34])
-    finalnum = num1+num2+num3+num4+num5
-    print(time.asctime())
-    print(finalnum)
-    f= open("tempinfo.txt", "a")
-    f.write(time.asctime())
-    f.write(": ")
-    f.write(finalnum)
-    f.write("°C \n")
-    f.close()
-    y.append(finalnum)
-    x.append(int(exectime))
-    exectime=time.time()-starttime
-    print(exectime, "Seconds")
-plot.plot(x,y)
-plot.ylabel('Temp (degrees celcius)')
-plot.xlabel('Time elapsed (seconds)')
-plot.gca().invert_yaxis()
-plot.show()
+import matplotlib.animation as animation
+maxtime = 10
+interval = 2 #recommended to leave at 2
 
+x=[]
+y=[]
+serconfig = serial.Serial('COM3', 9600)    
+plt = plot.figure() 
+graph = plt.add_subplot(1,1,1)
+def graphdata(f):
+    global x
+    global y
+    time.sleep(interval)
+    line=serconfig.readline()
+    line= line.decode('utf-8')
+    line= float(line)
+    print(line)
+    y.append(line)
+    x.append(time.asctime())
+    x=x[-20:]
+    y=y[-20:]
+    graph.clear()
+    graph.plot (x,y)
+    plot.xticks(rotation=45, ha='right')
+animated = animation.FuncAnimation(plt, graphdata, interval=100 )
+plot.show()
